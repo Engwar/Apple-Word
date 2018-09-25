@@ -9,9 +9,24 @@
 import Foundation
 
 struct Game {
-    // duessed word
+    // guessed word
     var word: String
     
     // amount of attempts
     var incorrectMovesRemaining: Int
+    
+    //list of tapped letters
+    var guessedLetters: [Character]
+    
+    //processing tapped letter
+    mutating func playerGuessed(letter: Character) {
+        guessedLetters.append(letter)
+      
+        //check contains letter in word
+        if !word.contains(letter) {
+            incorrectMovesRemaining -= 1
+        }
+    }
+    
+    
 }
