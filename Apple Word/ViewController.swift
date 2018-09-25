@@ -17,8 +17,16 @@ class ViewController: UIViewController {
     let incorrectMovesAllowed = 7
     
     //amounts of wins and loses
-    var totalWins = 0
-    var totalLosses = 0
+    var totalWins = 0 {
+        didSet {
+            newRound()
+        }
+    }
+    var totalLosses = 0 {
+        didSet {
+            newRound()
+        }
+    }
     
     var currentGame: Game!
     
@@ -35,11 +43,22 @@ class ViewController: UIViewController {
     
     //start of new round of game
     func newRound() {
-        let newWord = listOfWords.removeFirst()
-        
-        currentGame = Game(word: newWord, incorrectMovesRemaining: incorrectMovesAllowed, guessedLetters: [])
-        
-        updateUI()
+        if !listOfWords.isEmpty {
+            let newWord = listOfWords.removeFirst()
+            
+            currentGame = Game(word: newWord, incorrectMovesRemaining: incorrectMovesAllowed, guessedLetters: [])
+            enableLetterButton(true)
+            updateUI()
+        } else {
+            enableLetterButton(false)
+        }
+    }
+    
+    // access/denied buttons
+    func enableLetterButton(_ enable: Bool) {
+        for button in letterButtons {
+            button.isEnabled = enable
+        }
     }
     
     //update of interface
