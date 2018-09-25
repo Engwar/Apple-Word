@@ -49,7 +49,8 @@ class ViewController: UIViewController {
         let image = UIImage(named: imageName)
         treeImageView.image = image
         
-        //update guessed word
+        //update guessed word - second variant lesson 21 : time 1:20:00
+        
         correctWordLabel.text = currentGame.formattedWord
         
         //update score
@@ -61,7 +62,19 @@ class ViewController: UIViewController {
         let letterString = sender.title(for: .normal)!
         let letter = Character(letterString.lowercased())
         currentGame.playerGuessed(letter: letter)
-        updateUI()
+        updateGameState()
+    }
+    
+    // check for game ending
+    func updateGameState() {
+        if currentGame.incorrectMovesRemaining < 1 {
+            totalLosses += 1
+        } else if currentGame.word == currentGame.formattedWord {
+            totalWins += 1
+        } else {
+             updateUI()
+        }
+       
     }
 
 }
