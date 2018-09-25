@@ -18,6 +18,19 @@ struct Game {
     //list of tapped letters
     var guessedLetters: [Character]
     
+    //show letters guessed
+    var formattedWord: String {
+        var guessedWord = ""
+        for letter in word {
+            if guessedLetters.contains(letter) {
+                guessedWord += "\(letter)"
+            } else {
+                guessedWord += "_"
+            }
+        }
+        return guessedWord
+    }
+    
     //processing tapped letter
     mutating func playerGuessed(letter: Character) {
         guessedLetters.append(letter)

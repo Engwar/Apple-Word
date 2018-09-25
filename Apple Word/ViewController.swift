@@ -49,6 +49,9 @@ class ViewController: UIViewController {
         let image = UIImage(named: imageName)
         treeImageView.image = image
         
+        //update guessed word
+        correctWordLabel.text = currentGame.formattedWord
+        
         //update score
         scoreLabel.text = "Wins: \(totalWins), Losses: \(totalLosses)"
     }
